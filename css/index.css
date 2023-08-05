@@ -6,6 +6,8 @@ body{
 }
 body,html{
     overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 #main{
     text-align: center;
@@ -165,7 +167,7 @@ input {
     position: sticky;
     width: 99vw;
     z-index: 2;
-    bottom: 0;
+    top: 99vh;
     left: 0.5vw;
     margin-inline: auto;
 
