@@ -340,7 +340,7 @@ const Navigators = (id) => {
 const StupidNavigator=(id)=>{
   if (id == "home") {
     $("#dashboard-main").fadeOut();
-    $("#res-ph").fadeOut();
+    $("#resPH").fadeOut();
     $("#history-main").fadeOut();
     $("#train-form-container").fadeOut(100, () => {
       $("#rest-container").fadeOut(100, () => {
@@ -355,7 +355,7 @@ const StupidNavigator=(id)=>{
     $("#dashboard-main").fadeIn();
   } else if (id == "history") {
     $("#main").fadeOut();
-    $("#res-ph").fadeOut();
+    $("#resPH").fadeOut();
     $("#dashboard-main").fadeOut();
     $("#history-main").fadeIn();
   }
@@ -412,7 +412,7 @@ const FinishReport = () => {
                     </div>`;
 
   document.getElementById('res-ph').innerHTML=str;
-  $('#res-ph').fadeIn();
+  $('#resPH').fadeIn();
   return Report;
   // <h1>Finished</h1>
   // <div id="time-container">
