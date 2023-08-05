@@ -16,6 +16,22 @@ const init = () => {
   console.log(CurrentPlan);
 };
 
+
+/* Get into full screen */
+function requestFullScreen(element) {
+  // Supports most browsers and their versions.
+  var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+  if (requestMethod) { // Native full screen.
+      requestMethod.call(element);
+  } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+          wscript.SendKeys("{F11}");
+      }
+  }
+}
+
 //right know return a plan by order
 //with amount of ex by the config json in the data base
 const GetCurrentPlan = () => {
@@ -87,6 +103,7 @@ const GetCurrentPlan = () => {
 
 //when click the start btn -> start plan !
 const StartTrain = () => {
+  requestFullScreen(document.body);
   $("#start-container").fadeOut(250, () => {
     isTrainNow = true;
     TrainStartTime = new Date();
