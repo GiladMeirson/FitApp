@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
+            
+
+        <!-- FIREBASE -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script
+            src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+        <!--**** Remember to add the database script ***-->
+        <script
+            src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+        <!-- FIREBASE -->
+        <script src="./js/config.js"></script>
+        <link rel="stylesheet" href="./css/EZ.css">
+        <script src="./js/EZ.js"></script>
+        <link rel="stylesheet" href="./css/index.css">
+        <script src="./js/Plan.js"></script>
+        <script src="./js/index.js"></script>
+        <title>Fit-App</title>
+
+    </head>
+    <body onload="init()">
+        <!-- Header with menu ?  -->
+        <div id="head">
+            <header class="header-fix d3-shadow">Fit App Menu</header>
+        </div>
+        <!-- The Main View App -->
+        <div id="main">
+            <!-- Start BTN -->
+            <div id="start-container">
+                <div class="d3-shadow" onclick="StartTrain()" id="start-btn">
+                    <span>Start Train</span>
+                </div>
+            </div>
+
+            <!-- Rest Section -->
+            <div  id="rest-container">
+                <div class="wrap-C">
+                    <div onclick="SkipToSet()" class="d3-shadow" id="rest-btn">
+                        <p>REST</p>
+                        <p>Click to return</p>
+                        <p style="font-size: 40px;" id="rest-time-title">00:00</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- the Train Plan Html -->
+            <div id="train-form-container">
+                <div id="wrap-form">
+                    <div class="wrap-C" id="form1">
+
+                        <!-- EXAMPLE OF RENDER -->
+                        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<!-- 
+                        <h2 id="time-title">Time: 00:10:42</h2>
+                        <h1>name of ex</h1>
+                        <p>Reps:</p>
+
+                        <div class="wrapReps">
+                            <input type="number" placeholder="reps ?" value="10"
+                                name="reps" id="repsIN">
+                            <div id="up-down-btn" class="wrap-C">
+                                <img onclick="ChangeReps(1)"
+                                    src="./assets/up.png" alt>
+                                <img onclick="ChangeReps(-1)"
+                                    src="./assets/down.png" alt>
+                            </div>
+                        </div>
+
+                        <p>Sets:</p>
+                        <input type="text" value="2" disabled name="set"
+                            id="setIN">
+                        <p style="margin-top: 4%;">was hard ?</p>
+                        <div id="dock-img">
+                            <img id="I1" onclick="ClickOnImgEffort(this)"
+                                src="./assets/1.png" alt>
+                            <img id="I2" onclick="ClickOnImgEffort(this)"
+                                src="./assets/2.png" alt>
+                            <img id="I3" onclick="ClickOnImgEffort(this)"
+                                src="./assets/3.png" alt>
+                            <img id="I4" onclick="ClickOnImgEffort(this)"
+                                src="./assets/4.png" alt>
+                            <img id="I5" onclick="ClickOnImgEffort(this)"
+                                src="./assets/5.png" alt>
+                            <img id="I6" onclick="ClickOnImgEffort(this)"
+                                src="./assets/6.png" alt>
+                            <img id="I7" onclick="ClickOnImgEffort(this)"
+                                src="./assets/7.png" alt>
+                        </div>
+                        <button
+                            style="margin-top: 5%; font-weight: 900; background-color: lightgreen;"
+                            class="btn-long btn-shadow">Next</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Result Container -->
+            <div id="result" class="wrap-C">
+                <div id="res-ph">
+                    <!-- <h1>Finished</h1>
+                    <div id="time-container">
+                        <p class="titletimeRes" id="total-time">Total Time: 01:15:56</p>
+                        <p class="titletimeRes" id="work-time">Work Time: 00:35:36</p>
+                        <p class="titletimeRes" id="rest-time">Rest Time: 00:45:23</p>
+                    </div>
+                    <div id="rank-container">
+                        <p class="titleRes" id="number-sets">Legs Rank: 15</p>
+                        <p class="titleRes" id="number-sets">Back Rank: 51</p>
+                        <p class="titleRes" id="number-sets">Chest Rank: 34</p>
+                        <p class="titleRes" id="number-sets">Deltoid Rank: 532</p>
+                        <p class="titleRes" id="number-sets">Triceps Rank: 324</p>
+                        <p class="titleRes" id="number-sets">Biceps Rank: 34</p>
+                    </div> -->
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div id="history-main">
+            history
+        </div>
+        <div id="dashboard-main">
+            dashboard
+        </div>
+
+        <div id="footer" class="d3-shadow">
+            <div id="Nav" class="wrap-R">
+                <img onclick="Navigators(this.id)" id="analysis" class="d3-shadow"
+                    src="./assets/elastic-band.png" alt>
+                <img onclick="Navigators(this.id)" id="home" class="d3-shadow" src="./assets/barbell.png" alt>
+                <img onclick="Navigators(this.id)" id="history" class="d3-shadow" src="./assets/dumbbells.png"
+                    alt>
+            </div>
+        </div>
+    </body>
+</html>
