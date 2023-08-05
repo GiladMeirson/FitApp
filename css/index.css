@@ -162,7 +162,7 @@ input {
     border-top-left-radius: 50%;
     height: 10vh;
     background-image: linear-gradient(to top, rgb(27, 27, 27),rgb(40, 21, 51) , rgb(142, 81, 170));
-    position: absolute;
+    position: sticky;
     width: 99vw;
     z-index: 2;
     bottom: 0;
