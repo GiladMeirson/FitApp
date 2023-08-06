@@ -1,4 +1,5 @@
 const init = () => {
+  requestFullScreen(document.body);
   ref = firebase.database().ref("History");
   isTrainNow = false;
   TrainStartTime = 0;
@@ -294,6 +295,7 @@ const RenderEX = (ex) => {
 };
 
 const Navigators = (id) => {
+  requestFullScreen(document.body);
   if (isTrainNow) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
