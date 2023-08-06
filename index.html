@@ -6,7 +6,12 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
             crossorigin="anonymous"></script>
-            
+
+
+        <!-- Multplie List -->
+
+        <!-- Multplie List -->
+
 
         <!-- FIREBASE -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -39,14 +44,132 @@
         <!-- The Main View App -->
         <div id="main">
             <!-- Start BTN -->
-            <div id="start-container">
+            <div id="start-container" class="wrap-C">
                 <div class="d3-shadow" onclick="StartTrain()" id="start-btn">
                     <span>Start Train</span>
+                </div>
+
+                <div onclick="ToConfig()" id="config-container">
+                    <img src="./assets/settings.png" alt>
+                    <span>config plan</span>
+                </div>
+            </div>
+
+            <div id="config-form-container">
+                <div id="config-form">
+                    <select onchange="DisplayPlan(this.value)" id="plan-type">
+                        <option value="-1">Current</option>
+                        <option value="full body">full body</option>
+                        <option value="A-B">A-B</option>
+                        <option value="A-B-C">A-B-C</option>
+                        <option value="Power">Power</option>
+                    </select>
+
+                    <div id="config-inputs">
+                        <div id="wrap-config-inputs">
+                            <hr>
+                            <h1>A</h1>
+                            <div class="wrap-R">
+                                <div class="wrap-C">
+                                    <label for="Legs">Legs</label>
+                                    <input type="number" value="0" name="Legs" id="LegsCheck">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Back</label>
+                                    <input type="number" value="0" name="Back" id="BackCheck">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Chest</label>
+                                    <input type="number" value="0" name="Chest" id="ChestCheck">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Deltoid</label>
+                                    <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Triceps</label>
+                                    <input type="number" value="0" name="Triceps" id="TricepsCheck">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Biceps</label>
+                                    <input type="number" value="0" name="Biceps" id="BicepsCheck">
+                                </div>
+                            
+                                
+                            </div>
+               
+                            <hr>
+                            <h1>B</h1>
+                            <div class="wrap-R">
+                                <div class="wrap-C">
+                                    <label for="Legs">Legs</label>
+                                    <input type="number" value="0" name="Legs" id="LegsCheckB">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Back</label>
+                                    <input type="number" value="0" name="Back" id="BackCheckB">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Chest</label>
+                                    <input type="number" value="0" name="Chest" id="ChestCheckB">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Deltoid</label>
+                                    <input type="number" value="0" name="Deltoid" id="DeltoidCheckB">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Triceps</label>
+                                    <input type="number" value="0" name="Triceps" id="TricepsCheckB">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Biceps</label>
+                                    <input type="number" value="0" name="Biceps" id="BicepsCheckB">
+                                </div>
+                            
+                                
+                            </div>
+                            <hr>
+                            <h1>C</h1>
+                            <div class="wrap-R">
+                                <div class="wrap-C">
+                                    <label for="Legs">Legs</label>
+                                    <input type="number" value="0" name="Legs" id="LegsCheckC">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Back</label>
+                                    <input type="number" value="0" name="Back" id="BackCheckC">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Chest</label>
+                                    <input type="number" value="0" name="Chest" id="ChestCheckC">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Deltoid</label>
+                                    <input type="number" value="0" name="Deltoid" id="DeltoidCheckC">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Triceps</label>
+                                    <input type="number" value="0" name="Triceps" id="TricepsCheckC">
+                                </div>
+                                <div class="wrap-C">
+                                    <label for="Legs">Biceps</label>
+                                    <input type="number" value="0" name="Biceps" id="BicepsCheckC">
+                                </div>
+                            
+                                
+                            </div>
+
+
+
+
+                        </div>
+                        <button class="btn-long btn-success">Change plan</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Rest Section -->
-            <div  id="rest-container">
+            <div id="rest-container">
                 <div class="wrap-C">
                     <div onclick="SkipToSet()" class="d3-shadow" id="rest-btn">
                         <p>REST</p>
@@ -64,7 +187,7 @@
 
                         <!-- EXAMPLE OF RENDER -->
                         <!-- !!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- 
+                        <!-- 
                         <h2 id="time-title">Time: 00:10:42</h2>
                         <h1>name of ex</h1>
                         <p>Reps:</p>
@@ -126,12 +249,9 @@
                             <p class="titleRes" id="number-sets">Biceps Rank: 34</p>
                         </div> -->
                     </div>
-    
-    
-    
+
                 </div>
             </div>
-
 
         </div>
 
@@ -144,10 +264,13 @@
 
         <div id="footer" class="d3-shadow">
             <div id="Nav" class="wrap-R">
-                <img onclick="Navigators(this.id)" id="analysis" class="d3-shadow"
+                <img onclick="Navigators(this.id)" id="analysis"
+                    class="d3-shadow"
                     src="./assets/elastic-band.png" alt>
-                <img onclick="Navigators(this.id)" id="home" class="d3-shadow" src="./assets/barbell.png" alt>
-                <img onclick="Navigators(this.id)" id="history" class="d3-shadow" src="./assets/dumbbells.png"
+                <img onclick="Navigators(this.id)" id="home" class="d3-shadow"
+                    src="./assets/barbell.png" alt>
+                <img onclick="Navigators(this.id)" id="history"
+                    class="d3-shadow" src="./assets/dumbbells.png"
                     alt>
             </div>
         </div>

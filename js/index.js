@@ -1,5 +1,4 @@
 const init = () => {
-  requestFullScreen(document.body);
   ref = firebase.database().ref("History");
   isTrainNow = false;
   TrainStartTime = 0;
@@ -17,19 +16,24 @@ const init = () => {
   console.log(CurrentPlan);
 };
 
-
 /* Get into full screen */
 function requestFullScreen(element) {
   // Supports most browsers and their versions.
-  var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+  var requestMethod =
+    element.requestFullScreen ||
+    element.webkitRequestFullScreen ||
+    element.mozRequestFullScreen ||
+    element.msRequestFullScreen;
 
-  if (requestMethod) { // Native full screen.
-      requestMethod.call(element);
-  } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-      var wscript = new ActiveXObject("WScript.Shell");
-      if (wscript !== null) {
-          wscript.SendKeys("{F11}");
-      }
+  if (requestMethod) {
+    // Native full screen.
+    requestMethod.call(element);
+  } else if (typeof window.ActiveXObject !== "undefined") {
+    // Older IE.
+    var wscript = new ActiveXObject("WScript.Shell");
+    if (wscript !== null) {
+      wscript.SendKeys("{F11}");
+    }
   }
 }
 
@@ -176,7 +180,7 @@ const SkipToSet = () => {
           Swal.fire("Saved!", "", "success");
           isTrainNow = false;
           const report = FinishReport();
-          CurrentTrain.Report = report
+          CurrentTrain.Report = report;
           Save(CurrentTrain);
 
           return;
@@ -231,7 +235,7 @@ const NextClick = () => {
   //Send to DB
 
   //Rest
-  
+
   $("#train-form-container").fadeOut(200, () => {
     $("#rest-container").fadeIn(200, () => {
       let startTime = new Date();
@@ -339,7 +343,7 @@ const Navigators = (id) => {
   }
 };
 
-const StupidNavigator=(id)=>{
+const StupidNavigator = (id) => {
   if (id == "home") {
     $("#dashboard-main").fadeOut();
     $("#resPH").fadeOut();
@@ -361,7 +365,406 @@ const StupidNavigator=(id)=>{
     $("#dashboard-main").fadeOut();
     $("#history-main").fadeIn();
   }
-}
+};
+
+const ToConfig = () => {
+  $("#start-container").fadeOut(200, () => {
+    $("#config-form-container").fadeIn(100, () => {});
+    DisplayPlan(CurrentConfig.Type,true);
+  });
+};
+const DisplayPlan = (val, flagCurrent = false) => {
+  
+  let str = ``;
+  if (flagCurrent == false) {
+    if (val == "full body") {
+      str = `<hr>
+      <h1>Full body</h1>
+      <div class="wrap-R">
+          <div class="wrap-C">
+              <label for="Legs">Legs</label>
+              <input type="number" value="0" name="Legs" id="LegsCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Back</label>
+              <input type="number" value="0" name="Back" id="BackCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Chest</label>
+              <input type="number" value="0" name="Chest" id="ChestCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Deltoid</label>
+              <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Triceps</label>
+              <input type="number" value="0" name="Triceps" id="TricepsCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Biceps</label>
+              <input type="number" value="0" name="Biceps" id="BicepsCheck">
+          </div>
+      
+          
+      </div>`;
+    } else if (val == "A-B") {
+      str = `<hr>
+    <h1>A</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheck">
+        </div>
+    
+        
+    </div>
+
+    <hr>
+    <h1>B</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckB">
+        </div>
+    
+        
+    </div>`;
+    } else if (val == "A-B-C") {
+      str = `<hr>
+    <h1>A</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheck">
+        </div>
+    
+        
+    </div>
+
+    <hr>
+    <h1>B</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckB">
+        </div>
+    
+        
+    </div>
+    <hr>
+    <h1>C</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckC">
+        </div>
+    
+        
+    </div>`;
+    } else if (val == "-1") {
+      //need
+      console.log(CurrentConfig.Type)
+      DisplayPlan(CurrentConfig.Type,true);
+    } else if (val == "Power") {
+      alert("not yet");
+    }
+  } else {
+    if (val == "full body") {
+      console.log('im here')
+      str = `<hr>
+      <h1>Full body</h1>
+      <div class="wrap-R">
+          <div class="wrap-C">
+              <label for="Legs">Legs</label>
+              <input type="number" value="${CurrentConfig.Legs}" name="Legs" id="LegsCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Back</label>
+              <input type="number" value="${CurrentConfig.Back}" name="Back" id="BackCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Chest</label>
+              <input type="number" value="${CurrentConfig.Chest}" name="Chest" id="ChestCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Deltoid</label>
+              <input type="number" value="${CurrentConfig.Deltoid}" name="Deltoid" id="DeltoidCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Triceps</label>
+              <input type="number" value="${CurrentConfig.Triceps}" name="Triceps" id="TricepsCheck">
+          </div>
+          <div class="wrap-C">
+              <label for="Legs">Biceps</label>
+              <input type="number" value="${CurrentConfig.Biceps}" name="Biceps" id="BicepsCheck">
+          </div>
+      
+          
+      </div>`;
+    } else if (val == "A-B") {
+      str = `<hr>
+    <h1>A</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheck">
+        </div>
+    
+        
+    </div>
+
+    <hr>
+    <h1>B</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckB">
+        </div>
+    
+        
+    </div>`;
+    } else if (val == "A-B-C") {
+      str = `<hr>
+    <h1>A</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheck">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheck">
+        </div>
+    
+        
+    </div>
+
+    <hr>
+    <h1>B</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckB">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckB">
+        </div>
+    
+        
+    </div>
+    <hr>
+    <h1>C</h1>
+    <div class="wrap-R">
+        <div class="wrap-C">
+            <label for="Legs">Legs</label>
+            <input type="number" value="0" name="Legs" id="LegsCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Back</label>
+            <input type="number" value="0" name="Back" id="BackCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Chest</label>
+            <input type="number" value="0" name="Chest" id="ChestCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Deltoid</label>
+            <input type="number" value="0" name="Deltoid" id="DeltoidCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Triceps</label>
+            <input type="number" value="0" name="Triceps" id="TricepsCheckC">
+        </div>
+        <div class="wrap-C">
+            <label for="Legs">Biceps</label>
+            <input type="number" value="0" name="Biceps" id="BicepsCheckC">
+        </div>
+    
+        
+    </div>`;
+    } else if (val == "-1") {
+      //need
+      DisplayPlan(CurrentConfig.Type,true);
+    } else if (val == "Power") {
+      alert("not yet");
+    }
+  }
+  document.getElementById('wrap-config-inputs').innerHTML=str;
+};
 
 const FinishReport = () => {
   console.log(CurrentTrain.Ex);
@@ -390,31 +793,51 @@ const FinishReport = () => {
   }
   let ResTimeSeconds = TimediffBrutoSECONDS - sumSecondsWorkTotal;
 
-  let workH=Math.floor(sumSecondsWorkTotal/(60*60)); // hour
-  let workM = Math.floor(sumSecondsWorkTotal%(60*60)/60); // min
-  let workS = Math.floor(sumSecondsWorkTotal%(60*60)%60); //sec
+  let workH = Math.floor(sumSecondsWorkTotal / (60 * 60)); // hour
+  let workM = Math.floor((sumSecondsWorkTotal % (60 * 60)) / 60); // min
+  let workS = Math.floor((sumSecondsWorkTotal % (60 * 60)) % 60); //sec
 
-  let restH=Math.floor(ResTimeSeconds/(60*60)); // hour
-  let restM = Math.floor(ResTimeSeconds%(60*60)/60); // min
-  let restS = Math.floor(ResTimeSeconds%(60*60)%60); //sec
+  let restH = Math.floor(ResTimeSeconds / (60 * 60)); // hour
+  let restM = Math.floor((ResTimeSeconds % (60 * 60)) / 60); // min
+  let restS = Math.floor((ResTimeSeconds % (60 * 60)) % 60); //sec
 
   let str = `<h1>Finished</h1>
                     <div id="time-container">
-                        <p class="titletimeRes" id="total-time">Total Time: ${TimediffBruto.hours}:${TimediffBruto.minutes}:${TimediffBruto.seconds}</p>
+                        <p class="titletimeRes" id="total-time">Total Time: ${
+                          TimediffBruto.hours
+                        }:${TimediffBruto.minutes}:${TimediffBruto.seconds}</p>
                         <p class="titletimeRes" id="work-time">Work Time: ${workH}:${workM}:${workS}</p>
                         <p class="titletimeRes" id="rest-time">Rest Time: ${restH}:${restM}:${restS}</p>
                     </div>
                     <div id="rank-container">
-                        <p class="titleRes" id="number-sets">Legs Rank: ${roundD(Report.Legs,2)}</p>
-                        <p class="titleRes" id="number-sets">Back Rank: ${roundD(Report.Back,2)}</p>
-                        <p class="titleRes" id="number-sets">Chest Rank: ${roundD(Report.Chest,2)}</p>
-                        <p class="titleRes" id="number-sets">Deltoid Rank: ${roundD(Report.Deltoid,2)}</p>
-                        <p class="titleRes" id="number-sets">Triceps Rank: ${roundD(Report.Triceps,2)}</p>
-                        <p class="titleRes" id="number-sets">Biceps Rank: ${roundD(Report.Biceps,2)}</p>
+                        <p class="titleRes" id="number-sets">Legs Rank: ${roundD(
+                          Report.Legs,
+                          2
+                        )}</p>
+                        <p class="titleRes" id="number-sets">Back Rank: ${roundD(
+                          Report.Back,
+                          2
+                        )}</p>
+                        <p class="titleRes" id="number-sets">Chest Rank: ${roundD(
+                          Report.Chest,
+                          2
+                        )}</p>
+                        <p class="titleRes" id="number-sets">Deltoid Rank: ${roundD(
+                          Report.Deltoid,
+                          2
+                        )}</p>
+                        <p class="titleRes" id="number-sets">Triceps Rank: ${roundD(
+                          Report.Triceps,
+                          2
+                        )}</p>
+                        <p class="titleRes" id="number-sets">Biceps Rank: ${roundD(
+                          Report.Biceps,
+                          2
+                        )}</p>
                     </div>`;
 
-  document.getElementById('res-ph').innerHTML=str;
-  $('#resPH').fadeIn();
+  document.getElementById("res-ph").innerHTML = str;
+  $("#resPH").fadeIn();
   return Report;
   // <h1>Finished</h1>
   // <div id="time-container">

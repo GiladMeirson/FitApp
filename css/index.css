@@ -32,6 +32,19 @@ body,html{
     font-weight: 700;
     padding: 5%;
 }
+#config-container img {
+    width: 30px;
+    margin-right: 10px;
+}
+#config-container {
+    display: flex;
+    align-items: center;
+    margin-top: 55px;
+    padding: 15px;
+}
+#config-container span {
+    font-size: 22px;
+}
 #rest-btn{
     background-color: rgba(219, 80, 70, 0.651);
     color: rgb(61, 2, 2);
@@ -49,7 +62,7 @@ body,html{
     color:  rgba(59, 180, 59, 0.651);
 
 }
-#rest-container{
+#rest-container,#config-form-container{
     display:none ;
     margin-top: 35%;
 }
@@ -154,6 +167,18 @@ input {
 }
 .titletimeRes{
     font-size: 20px;
+}
+#config-inputs button {
+    margin-top: 25px;
+}
+#config-inputs .wrap-R .wrap-C input {
+    width: 20px;
+    height: 20px;
+    
+    accent-color: rgb(142, 81, 170);
+}
+#wrap-config-inputs label{
+    font-size: 14px;
 }
 
 
