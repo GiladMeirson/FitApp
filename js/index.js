@@ -116,10 +116,10 @@ const StartTrain = () => {
     CurrentSet = 1;
     // console.log(CurrentPlan);
     if (CurrentPlan != undefined) {
-      RenderEX(CurrentPlan.Ex[CurrentIndexEX]);
+      RenderEX(CurrentPlan.Ex[CurrentIndexEX],CurrentPlan.Ex[CurrentIndexEX+1]);
     } else {
       setTimeout(() => {
-        RenderEX(CurrentPlan.Ex[CurrentIndexEX]);
+        RenderEX(CurrentPlan.Ex[CurrentIndexEX],CurrentPlan.Ex[CurrentIndexEX+1]);
       }, 250);
     }
   });
@@ -191,7 +191,7 @@ const SkipToSet = () => {
         }
       });
     } else {
-      RenderEX(CurrentPlan.Ex[CurrentIndexEX]);
+      RenderEX(CurrentPlan.Ex[CurrentIndexEX],CurrentPlan.Ex[CurrentIndexEX+1]);
     }
   });
 };
@@ -244,7 +244,15 @@ const NextClick = () => {
   });
 };
 
-const RenderEX = (ex) => {
+const RenderEX = (ex,next) => {
+  let nextStr = ``;
+  
+  if (next!=undefined && next!=null) {
+    nextStr=next.name;
+  }
+  else {
+    nextStr=`End`
+  }
   let StartTimeSet = new Date();
   TimerSetInterval = setInterval(RenderTimerSet, 1000, StartTimeSet);
   let str = `
@@ -290,8 +298,9 @@ const RenderEX = (ex) => {
           src="./assets/7.png" alt>
   </div>
   <button
-      style="margin-top: 5%; font-weight: 900; background-color: lightgreen;"
+      style="margin-block: 10%; font-weight: 900; background-color: lightgreen;"
       class="btn-long d3-shadow" onclick="NextClick()">Next</button>
+      <p style="font-size:16px; color:rgb(142, 81, 170); margin-block:5%;">Next Ex : ${nextStr}</p>
   `;
 
   document.getElementById("form1").innerHTML = str;
