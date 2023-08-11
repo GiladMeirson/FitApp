@@ -103,6 +103,10 @@ const GetCurrentPlan = () => {
       console.log(CurrentPlan);
       return CurrentPlan;
     }
+
+    if (CurrentConfig.Type=='A-B') {
+      
+    }
   });
 };
 
@@ -330,6 +334,7 @@ const Navigators = (id) => {
       })
       .then((result) => {
         if (result.isConfirmed) {
+          isTrainNow=false;
           swalWithBootstrapButtons.fire(
             "Deleted!",
             "Your train has been deleted.",
@@ -355,6 +360,7 @@ const Navigators = (id) => {
 const StupidNavigator = (id) => {
   if (id == "home") {
     $("#dashboard-main").fadeOut();
+    $("#config-form-container").fadeOut();
     $("#resPH").fadeOut();
     $("#history-main").fadeOut();
     $("#train-form-container").fadeOut(100, () => {
@@ -367,9 +373,12 @@ const StupidNavigator = (id) => {
     $("#main").fadeOut();
     $("#res-ph").fadeOut();
     $("#history-main").fadeOut();
+    $("#config-form-container").fadeOut();
     $("#dashboard-main").fadeIn();
+   
   } else if (id == "history") {
     $("#main").fadeOut();
+    $("#config-form-container").fadeOut();
     $("#resPH").fadeOut();
     $("#dashboard-main").fadeOut();
     $("#history-main").fadeIn();
@@ -382,8 +391,8 @@ const ToConfig = () => {
     DisplayPlan(CurrentConfig.Type,true);
   });
 };
-const DisplayPlan = (val, flagCurrent = false) => {
-  
+const DisplayPlan = (val, flagCurrent) => {
+  console.log(val,flagCurrent)
   let str = ``;
   if (flagCurrent == false) {
     if (val == "full body") {
@@ -573,8 +582,10 @@ const DisplayPlan = (val, flagCurrent = false) => {
     </div>`;
     } else if (val == "-1") {
       //need
+      console.log('yes');
       console.log(CurrentConfig.Type)
       DisplayPlan(CurrentConfig.Type,true);
+      return;
     } else if (val == "Power") {
       alert("not yet");
     }
