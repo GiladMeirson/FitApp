@@ -13,7 +13,7 @@ const init = () => {
   CurrentSet = 0;
   CurrentWeight = 25;
   CurrentPlan = GetCurrentPlan();
-  console.log(CurrentPlan);
+  //console.log(CurrentPlan);
 };
 
 /* Get into full screen */
@@ -101,6 +101,7 @@ const GetCurrentPlan = () => {
       // console.log(ResArray);
       CurrentPlan = ResArray;
       console.log(CurrentPlan);
+      $('#firstExTitle').text(`The first Ex is : ${CurrentPlan.Ex[0].name}`)
       return CurrentPlan;
     }
 
@@ -243,6 +244,16 @@ const NextClick = () => {
   $("#train-form-container").fadeOut(200, () => {
     $("#rest-container").fadeIn(200, () => {
       let startTime = new Date();
+      let Cset = CurrentSet;
+      let C_ex_index = CurrentIndexEX;
+      Cset++;
+      
+      if (Cset > CurrentPlan.Ex[C_ex_index].sets) {
+        C_ex_index++;
+        Cset = 1;
+      }
+      $('#C-set').text(`Next set: ${Cset}`)
+      $('#C-Ex').text(`Next Ex: ${CurrentPlan.Ex[C_ex_index].name}`);
       TimerRestInterval = setInterval(RenderTimerSet, 1000, startTime, false);
     });
   });
@@ -874,6 +885,12 @@ const FinishReport = () => {
   //     <p class="titleRes" id="number-sets">Biceps Rank: 34</p>
   // </div>
 };
+
+const SubmitPlanConfig = () =>{
+  
+}
+
+
 
 //------------------fireBase------------------\\
 
